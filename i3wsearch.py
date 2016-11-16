@@ -52,7 +52,7 @@ class Application(Frame):
     def _key(self, event):
 	if event.keysym == "Escape":
 	    self._quit()
-	elif event.keysym == "Return":
+	elif event.keysym in ["Return","KP_Enter"]:
 	    self._ok()
 	elif event.keysym == "BackSpace":
 	    self.entry.delete(0,END)
