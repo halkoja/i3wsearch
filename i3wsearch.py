@@ -79,7 +79,7 @@ class Application(Frame):
 		i3.command('[con_id=%s] focus' % value)
 		self.master.destroy()
 	except IndexError:
-		self.value = None
+		self.master.destroy()
 
     def _quit(self, event=None):
 	self.master.destroy()
