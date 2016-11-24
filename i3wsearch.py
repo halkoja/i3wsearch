@@ -2,6 +2,7 @@ from Tkinter import *
 import i3ipc
 
 i3 = i3ipc.Connection()
+current = i3.get_tree().find_focused().id
 wins = i3.get_tree().find_focused().workspace().leaves()
 ids = [w.id for w in wins]
 names = [w.name for w in wins]
@@ -79,9 +80,11 @@ class Application(Frame):
 		i3.command('[con_id=%s] focus' % value)
 		self.master.destroy()
 	except IndexError:
+		i3.command('[con_id=%s] focus ' % current)
 		self.master.destroy()
 
     def _quit(self, event=None):
+	i3.command('[con_id=%s] focus ' % current)
 	self.master.destroy()
 
     def _seloffset(self, ofs, event=None):
