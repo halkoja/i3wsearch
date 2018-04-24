@@ -7,12 +7,12 @@ if [ -z "$1" ]; then
 
    local LIST=`i3-msg -t get_tree | \
    jq --arg active_ws $NAME --arg active_output $OUT -r \
-   '.nodes | .[] | select(.name==$active_output) | .nodes | .[] | select(.name=="content") | .nodes | .[] | \
+   '.nodes[] | select(.name==$active_output) | .nodes[] | select(.name=="content") | .nodes[] | \
    select(.name==$active_ws) | recurse(.nodes[]) | select(.window) | .name + " (\(.id))"'`
 else
    local LIST=`i3-msg -t get_tree | \
    jq -r \
-   '.nodes | .[] | select(.name!="__i3") | .nodes | .[] | \
+   '.nodes[] | select(.name!="__i3") | .nodes[] | \
    select(.name=="content") | recurse(.nodes[]) | select(.window) | .name + " (\(.id))"'`
 fi
 dmenu -l 20 -i -b <<< "${LIST}"
